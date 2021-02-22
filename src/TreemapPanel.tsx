@@ -16,6 +16,7 @@ import {
 } from '@grafana/data';
 import { useTheme, Badge, ContextMenu, MenuItemsGroup, MenuItem } from '@grafana/ui';
 
+import { AdaptiveText } from './AdaptiveText';
 import { TreemapOptions } from 'types';
 
 // Tippy
@@ -218,17 +219,13 @@ export const TreemapPanel: React.FC<Props> = ({ options, data, width, height }) 
                       height={innerHeight}
                       fill={node.colorByField!.display!(colorValue).color!}
                     />
-                    {textFitsInRect ? (
-                      <text
-                        x={d.x0 + margin.left}
-                        y={d.y0 + margin.top}
-                        fontSize="12px"
-                        fontWeight="500"
-                        fill={theme.colors.panelBg}
-                      >
-                        {node.name}
-                      </text>
-                    ) : null}
+                    <AdaptiveText
+                      x={d.x0 + 5}
+                      y={d.y0 + 5}
+                      text={node.name}
+                      width={innerWidth - 10}
+                      height={innerHeight - 10}
+                    />
                   </g>
                 </Tippy>
               );
